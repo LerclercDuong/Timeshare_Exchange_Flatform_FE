@@ -1,5 +1,6 @@
 import logo from './logo.svg';
-import Login from './pages/Login';
+import Header from './components/Header/index';
+import Footer from './components/Footer/index';
 import {BrowserRouter, Routes, Route, Navigate, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {publicRoutes, privateRoutes} from './routes/route';
@@ -7,8 +8,10 @@ import './App.css';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(true);
+
   return (
     <div className="App">
+      <Header />
       <Routes>
         <Route>
           {privateRoutes.map((route, index) => {
@@ -39,7 +42,9 @@ function App() {
           })}
         </Route>
       </Routes>
+      <Footer />
     </div>
+    
   );
 }
 
