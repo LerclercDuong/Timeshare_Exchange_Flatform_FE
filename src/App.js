@@ -11,7 +11,6 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
       <Routes>
         <Route>
           {privateRoutes.map((route, index) => {
@@ -42,7 +41,6 @@ function App() {
           })}
         </Route>
       </Routes>
-      <Footer />
     </div>
     
   );
