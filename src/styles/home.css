@@ -40,11 +40,52 @@
 .services__subtitle {
     font-size: 2.2rem;
     font-weight: 500;
-    color: #ee6e6e;
+    color: #ee6e6e !important;
     font-family: var(--subtitle-font-name) !important;
 }
 
 .services__tile {
     font-size: 2.5rem;
     font-weight: 500;
+}
+
+.featured__tour-title {
+    font-size: 2.3rem;
+    font-weight: 500;
+}
+
+.experience__content h2{
+    font-size: 2.5rem;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+.experience__content p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-top: 1rem;
+}
+
+.counter__wrapper {
+    margin-top: 2.5rem;
+}
+
+.counter__box span {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery__title{
+    font-size: 2.3rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+.testimonial__title {
+    font-size: 2.3rem;
+    margin-top: 1rem;
 }
