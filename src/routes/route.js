@@ -4,6 +4,7 @@ import About from "../pages/About";
 import AdminDashboard from "../pages/AdminDashboard";
 import AdminTimeshares from "../pages/AdminTimeshares";
 import AdminUsers from "../pages/AdminUsers";
+import Home from "../pages/Home";
 
 const privateRoutes = [
     {
@@ -33,6 +34,10 @@ const publicRoutes = [
         path: '/about',
         page: About,
     },
+    {
+        path: '/home',
+        page: Home,
+    }
 
 ]
 

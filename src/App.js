@@ -1,6 +1,4 @@
-import logo from './logo.svg';
-import Header from './components/Header/index';
-import Footer from './components/Footer/index';
+
 import {BrowserRouter, Routes, Route, Navigate, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {publicRoutes, privateRoutes} from './routes/route';
