@@ -18,7 +18,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Timeshare exchange flatform
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -28,7 +28,18 @@ function Copyright(props) {
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
-const defaultTheme = createTheme();
+const defaultTheme = createTheme(
+    {
+        palette: {
+            primary: {
+                main: '#faa935',
+            },
+            secondary: {
+                main: '#4fa34f',
+            },
+        },
+    }
+);
 
 export default function SignInSide() {
   const handleSubmit = (event) => {
