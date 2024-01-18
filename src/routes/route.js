@@ -6,7 +6,7 @@ import Home from "../pages/Home";
 
 const privateRoutes = [
     {
-        path: '/admin',
+        path: '/admin/*',
         page: Admin
     }
 ]
