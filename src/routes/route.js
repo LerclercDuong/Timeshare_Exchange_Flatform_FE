@@ -5,6 +5,8 @@ import AdminDashboard from "../pages/AdminDashboard";
 import AdminTimeshares from "../pages/AdminTimeshares";
 import AdminUsers from "../pages/AdminUsers";
 import Home from "../pages/Home";
+import TimeShare from "../pages/TimeShare";
+import TimeShareDetails from "../pages/TimeShareDetails";
 
 const privateRoutes = [
     {
@@ -37,7 +39,15 @@ const publicRoutes = [
     {
         path: '/home',
         page: Home,
-    }
+    },
+    {
+        path: '/timeshare',
+        page: TimeShare
+    },
+    {
+        path: '/timesharedetails/:id',
+        page: TimeShareDetails
+    },
 
 ]
 
