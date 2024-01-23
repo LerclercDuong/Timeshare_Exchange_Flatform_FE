@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react'
-import CommonSection from '../shared/CommonSection'
+import CommonSection from '../components/Shared/CommonSection'
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../styles/timeshare.css';
-//import TourCard from '../shared/TourCard';
-import SearchBar from '../shared/SearchBar';
+//import TourCard from '../Shared/TourCard';
+import SearchBar from '../components/Shared/SearchBar';
 import tourData from '../assets/data/tours';
 import { Container, Row, Col } from 'reactstrap';
-import TourCard from '../shared/TourCard';
+import TourCard from '../components/Shared/TourCard';
 
 const TimeShare = () => {
 
