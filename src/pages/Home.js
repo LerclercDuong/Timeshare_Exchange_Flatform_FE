@@ -13,8 +13,10 @@ import worldImg from '../assets/images/world.png';
 import SearchBar from '../components/Shared/SearchBar';
 import ServiceList from '../components/Services/ServiceList';
 import FeaturedTourList from '../components/Featured-tours';
-import experienceImg from '../assets/images/experience.png';
-import Testimonial from '../components/Testimonial';
+
+import experienceImg from '../assets/images/experienceImg.jpg';
+import Testimonial from '../components/Testimonial/Testimonial';
+
 
 const Home = () => {
   return (

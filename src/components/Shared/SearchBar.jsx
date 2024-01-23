@@ -1,23 +1,34 @@
-import React, {useRef} from 'react'
+
+import React, {useRef, useState} from 'react'
+
 import './search-bar.css';
 import { Col, Button, Form, FormGroup } from 'reactstrap';
 
 import { Link } from 'react-router-dom';
 
+
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+
 const SearchBar = () => {
 
     const locationRef = useRef('')
     const maxGroupSizeRef = useRef(0)
-    const dateRef = useRef('')
+
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+
 
     const searchHandler = () => {
 
         const location = locationRef.current.value
         const maxGroupSize = maxGroupSizeRef.current.value
-        const date = dateRef.current.value
 
-        if(location=='' | maxGroupSize=='' | date=='') {
-            return alert('All field are required!');
+
+
+        if (location === '' || maxGroupSize === '' || !startDate || !endDate) {
+            return alert('All fields are required, including date range!');
         }
     }
 
@@ -48,8 +59,20 @@ const SearchBar = () => {
                     <span>
                         <i class="ri-calendar-line"></i> {/* Change the icon to a calendar icon */}
                         <div>
-                            <h6>Date</h6> 
-                            <input type='date' placeholder='Select a date' ref={dateRef} />
+
+                        <h6>Date</h6>
+                                <DatePicker
+                                    selectsRange
+                                    startDate={startDate}
+                                    endDate={endDate}
+                                    onChange={(dates) => {
+                                        const [start, end] = dates;
+                                        setStartDate(start);
+                                        setEndDate(end);
+                                    }}
+                                    placeholderText='Select a date!'
+                                />
+
                         </div>
                     </span>
                 </FormGroup>
