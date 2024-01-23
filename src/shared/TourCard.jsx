@@ -32,7 +32,7 @@ const TourCard = ({ tour }) => {
                 <div className='card__bottom d-flex align-items-center justify-content-between mt-3'>
                     <h5>${price} (${price2}/night)</h5>
                     <button className='btn booking__btn'>
-                        <Link to={`/tours/${id}`}>Rent/Exchange</Link>
+                        <Link to={`/timesharedetails/${id}`}>Rent/Exchange</Link>
                     </button>
                 </div>
                 <div className='tour__daydetails'>
