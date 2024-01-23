@@ -8,6 +8,8 @@ import { Money } from '@mui/icons-material'
 import avatar from '../assets/images/avatar.jpg'
 import Renting from '../components/Renting/Renting'
 
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const TimeShareDetails = () => {
     const { id } = useParams();
@@ -37,6 +39,7 @@ const TimeShareDetails = () => {
     }
 
     return <>
+        <Header />
         <section>
             <Container>
                 <Row>
@@ -129,6 +132,7 @@ const TimeShareDetails = () => {
                 </Row>
             </Container>
         </section>
+        <Footer />
     </>
 }
 
