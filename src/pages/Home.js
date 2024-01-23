@@ -11,9 +11,9 @@ import heroVideo from '../assets/images/hero-video.mp4';
 import Subtitle from '../shared/Subtitle';
 import worldImg from '../assets/images/world.png';
 import SearchBar from '../shared/SearchBar';
-import ServiceList from '../services/ServiceList';
+import ServiceList from '../components/services/ServiceList';
 import FeaturedTourList from '../components/Featured-tours/FeaturedTourList';
-import experienceImg from '../assets/images/experience.png';
+import experienceImg from '../assets/images/experienceImg.jpg';
 import Testimonial from '../components/Testimonial/Testimonial';
 
 const Home = () => {
