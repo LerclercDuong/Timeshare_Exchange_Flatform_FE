@@ -1,23 +1,30 @@
+
 import React, {useRef, useState} from 'react'
+
 import './search-bar.css';
 import { Col, Button, Form, FormGroup } from 'reactstrap';
 
 import { Link } from 'react-router-dom';
 
+
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+
 
 const SearchBar = () => {
 
     const locationRef = useRef('')
     const maxGroupSizeRef = useRef(0)
+
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+
 
     const searchHandler = () => {
 
         const location = locationRef.current.value
         const maxGroupSize = maxGroupSizeRef.current.value
+
 
 
         if (location === '' || maxGroupSize === '' || !startDate || !endDate) {
@@ -52,6 +59,7 @@ const SearchBar = () => {
                     <span>
                         <i class="ri-calendar-line"></i> {/* Change the icon to a calendar icon */}
                         <div>
+
                         <h6>Date</h6>
                                 <DatePicker
                                     selectsRange
@@ -64,6 +72,7 @@ const SearchBar = () => {
                                     }}
                                     placeholderText='Select a date!'
                                 />
+
                         </div>
                     </span>
                 </FormGroup>

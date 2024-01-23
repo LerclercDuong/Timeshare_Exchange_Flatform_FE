@@ -28,7 +28,18 @@ function Copyright(props) {
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
-const defaultTheme = createTheme();
+const defaultTheme = createTheme(
+    {
+      palette: {
+        primary: {
+          main: '#faa935',
+        },
+        secondary: {
+          main: '#4fa34f',
+        },
+      },
+    }
+);
 
 export default function SignUp() {
   const handleSubmit = (event) => {
