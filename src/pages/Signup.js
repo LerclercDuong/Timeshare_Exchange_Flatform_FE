@@ -17,8 +17,8 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="/">
+        Timeshare exchange platform
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -32,10 +32,10 @@ const defaultTheme = createTheme(
     {
       palette: {
         primary: {
-          main: '#faa935',
+          main: '#283777',
         },
         secondary: {
-          main: '#4fa34f',
+          main: '#faa935',
         },
       },
     }
@@ -114,9 +114,20 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={12}>
+                <TextField
+                    required
+                    fullWidth
+                    name="repeatPassword"
+                    label="Repeat password"
+                    type="repeatpassword"
+                    id="repeatpassword"
+                    autoComplete="new-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  label="I want to receive updates via email."
                 />
               </Grid>
             </Grid>
@@ -130,7 +141,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
