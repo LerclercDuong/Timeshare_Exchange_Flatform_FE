@@ -2,9 +2,10 @@
 import React from 'react'
 import './header.css'
 import {Container, Row, Button} from  'reactstrap';
-import { NavLink, Link } from 'react-router-dom';
+import {NavLink, Link, useNavigate} from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-
+import {useDispatch, useSelector} from "react-redux";
+import {GetAccessToken, GetRefreshToken, SetRefreshToken, SetAccessToken} from "../../utils/tokens";
 
 const nav_links = [
     {
@@ -25,6 +26,13 @@ const nav_links = [
     },
   ]
 const Header = () =>{
+    const userInfo = useSelector((state) => state.auth.user);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    function logout(){
+        SetAccessToken(null);
+        window.location.reload();
+    }
     return (
         <header className='header'>
           <Container>
@@ -48,10 +56,14 @@ const Header = () =>{
                 </div>
                 {/* ========== menu end ============ */}
                   <div className="nav__right d-flex align-items-center gap-3">
-                    <div className="nav__btns d-flex align-items-center gap-3">
-                      <Button className='btn secondary__btn'><Link to='/login'>Login</Link></Button>
-                      <Button className='btn primary__btn'><Link to='/signup'>Register</Link></Button>
-                    </div>
+                      {
+                          userInfo ? <> <h5 className='mb-0'>{userInfo?.username}</h5>
+                              <Button className='btn btn-dark' onClick={logout}>Logout</Button>
+                          </> : <>
+                              <Button className='btn secondary__btn'><Link to='/login'>Login</Link></Button>
+                              <Button className='btn primary__btn'><Link to='/register'>Register</Link></Button>
+                          </>
+                      }
                     <span className="mobile_menu">
                     <i class="ri-menu-line"></i>
                     </span>

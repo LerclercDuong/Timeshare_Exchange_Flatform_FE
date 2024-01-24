@@ -15,7 +15,7 @@ import ServiceList from '../components/Services/ServiceList';
 import FeaturedTourList from '../components/Featured-tours';
 
 import experienceImg from '../assets/images/experienceImg.jpg';
-import Testimonial from '../components/Testimonial/Testimonial';
+import Testimonial from '../components/Testimonial/';
 
 
 const Home = () => {

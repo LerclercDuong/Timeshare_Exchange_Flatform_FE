@@ -33,6 +33,10 @@ const publicRoutes = [
         page: Home,
     },
     {
+        path: '/',
+        page: Home,
+    },
+    {
         path: '/timeshare',
         page: TimeShare
     },
