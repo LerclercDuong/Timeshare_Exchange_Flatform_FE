@@ -21,6 +21,7 @@ import {useNavigate} from "react-router-dom";
 import {LoginWithUsernameAndPassword} from '../services/auth.service';
 import {useEffect} from "react";
 import { Alert } from '@mui/material';
+
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -33,8 +34,6 @@ function Copyright(props) {
         </Typography>
     );
 }
-
-// TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme(
     {
@@ -54,30 +53,26 @@ export default function SignInSide() {
     let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [open, setOpen] = React.useState(true);
 
-    useEffect(()=>{
-        console.log(auth)
-    })
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         const data = new FormData(event.currentTarget);
-
         const information = {
             username: data.get('username'),
             password: data.get('password'),
         }
-
         try {
             const loginData = await LoginWithUsernameAndPassword(information?.username, information?.password);
             if(loginData?.userData){
                 dispatch(LoginSuccess(loginData.userData));
-                navigate(-1)
+                navigate('/home')
             }else{
                 throw new Error('Wrong username or password')
             }
         } catch (error) {
             dispatch(LoginFail({error: error?.message}));
+            setOpen(true);
         }
     };
 
@@ -90,11 +85,7 @@ export default function SignInSide() {
                     xs={false}
                     sm={4}
                     md={7}
-
                 ><video src={heroVideo} autoPlay loop muted/></Grid>
-
-
-
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                     <Box
                         sx={{
@@ -105,7 +96,7 @@ export default function SignInSide() {
                             alignItems: 'center',
                         }}
                     >
-                        <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+                        <Avatar sx={{mb: 1, bgcolor: 'secondary.main'}}>
                             <LockOutlinedIcon/>
                         </Avatar>
 
@@ -113,8 +104,8 @@ export default function SignInSide() {
                             Sign in
                         </Typography>
                         {
-                            isAuthenticated === false && (
-                                <Alert variant="outlined" severity="error">
+                            (isAuthenticated === false && open) && (
+                                <Alert variant="outlined" severity="error" onClose={() => { setOpen(false);}} sx={{mt: 1}}>
                                     {auth.error}
                                 </Alert>
                             )

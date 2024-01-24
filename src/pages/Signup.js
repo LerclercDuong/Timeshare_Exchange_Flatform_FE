@@ -46,8 +46,11 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
+      firstname: data.get('firstname'),
+      lastname: data.get('lastname'),
+      username: data.get('username'),
       password: data.get('password'),
+      repeatPassword: data.get('repeatPassword'),
     });
   };
 
@@ -57,13 +60,13 @@ export default function SignUp() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 5,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ mb: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -96,10 +99,10 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="username"
+                  label="Username"
+                  name="username"
+                  // autoComplete="email"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -121,7 +124,7 @@ export default function SignUp() {
                     label="Repeat password"
                     type="repeatpassword"
                     id="repeatpassword"
-                    autoComplete="new-password"
+                    // autoComplete="new-password"
                 />
               </Grid>
               <Grid item xs={12}>

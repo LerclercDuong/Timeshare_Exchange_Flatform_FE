@@ -18,7 +18,7 @@ function App() {
                 const response = await api.patch('/auth/isAuth')
                 if (response.data) {
                     dispatch(LoginSuccess(response.data))
-                    navigate(-1)
+                    navigate('/')
                 } else {
                     const refreshToken = await api.post('/auth/refresh-token')
                     if (refreshToken.data) {
