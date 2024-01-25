@@ -21,4 +21,14 @@ const LoginFail = (information) => (dispatch) => {
         },
     });
 };
-export {LoginSuccess, LoginFail};
+
+const RegisterSuccess = (information) => (dispatch) => {
+    dispatch({
+        type: REGISTER_SUCCESS,
+        payload: {
+            ...information
+        },
+    });
+};
+
+export {LoginSuccess, LoginFail, RegisterSuccess};

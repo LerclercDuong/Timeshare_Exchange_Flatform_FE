@@ -7,7 +7,7 @@ import '../styles/timeshare.css';
 //import TourCard from '../Shared/TourCard';
 import SearchBar from '../components/Shared/SearchBar';
 import tourData from '../assets/data/tours';
-import { Container, Row, Col } from 'reactstrap';
+import {Container, Row, Col} from 'reactstrap';
 import TourCard from '../components/Shared/TourCard';
 
 const TimeShare = () => {
@@ -17,49 +17,49 @@ const TimeShare = () => {
 
     useEffect(() => {
 
-        const pages = Math.ceil(5/4) //Later we use backend data
+        const pages = Math.ceil(5 / 4) //Later we use backend data
         setPageCount(pages);
 
-    },[page])
+    }, [page])
 
-  return (
-    <>
-     <Header />
+    return (
+        <>
+            <Header/>
 
-    <CommonSection title={"All TimeShares"}></CommonSection>
-    <section>
-        <Container>
-            <Row>
-                <SearchBar/>
-            </Row>
-        </Container>
-    </section>
-    <section className='pt-0'>
-        <Container>
-            <Row>
-                {
-                    tourData?.map(tour=> (
-                        <Col lg='3' className='mb-4' key={tour.id}>
-                        <TourCard tour={tour} />
-                         </Col>))
-                }
-                <Col lg='12'>
-                    <div className="pagination d-flex align-items-center justify-content-center mt-4 gap-3">
-                        {[...Array(pageCount).keys()].map(number => (
-                            <span key={number} onClick={() => setPage(number)}
-                            className={page===number ? "active__page" : ""}
-                            >
-                                {number +1}
+            <CommonSection title={"All TimeShares"}></CommonSection>
+            <section>
+                <Container>
+                    <Row>
+                        <SearchBar/>
+                    </Row>
+                </Container>
+            </section>
+            <section className='pt-0'>
+                <Container>
+                    <Row>
+                        {
+                            tourData?.map(tour => (
+                                <Col lg='3' className='mb-4' key={tour.id}>
+                                    <TourCard tour={tour}/>
+                                </Col>))
+                        }
+                        <Col lg='12'>
+                            <div className="pagination d-flex align-items-center justify-content-center mt-4 gap-3">
+                                {[...Array(pageCount).keys()].map(number => (
+                                    <span key={number} onClick={() => setPage(number)}
+                                          className={page === number ? "active__page" : ""}
+                                    >
+                                {number + 1}
                             </span>
-                        ))}
-                    </div>
-                </Col>
-            </Row>
-        </Container>
-    </section>
-    <Footer />
-    </>
-  )
+                                ))}
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
+            </section>
+            <Footer/>
+        </>
+    )
 }
 
 export default TimeShare

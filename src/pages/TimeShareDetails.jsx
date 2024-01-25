@@ -16,12 +16,8 @@ const TimeShareDetails = () => {
     const reviewMsgRef = useRef('')
     const [tourRating, setTourRating] = useState(null)
 
-
-
-
     //this is an static data later we will call our API and load our data from database
     const tour = tourData.find(tour => tour.id === id)
-
 
     //destructure properties from tour object
     const { photo, title, desc, price, address, reviews, city, distance, maxGroupSize, time } = tour

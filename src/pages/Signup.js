@@ -12,6 +12,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {SignUpWithUsernameAndPassword} from "../services/auth.service";
+import {LoginFail, LoginSuccess, RegisterSuccess} from "../actions/auth.action";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -42,16 +46,32 @@ const defaultTheme = createTheme(
 );
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+
+    const information = {
       firstname: data.get('firstname'),
       lastname: data.get('lastname'),
       username: data.get('username'),
       password: data.get('password'),
       repeatPassword: data.get('repeatPassword'),
-    });
+    }
+
+    try {
+      const registerData = await SignUpWithUsernameAndPassword(information);
+      if(registerData?.userData){
+        dispatch(RegisterSuccess(registerData.userData));
+        navigate('/home')
+      }else{
+        throw new Error('Wrong username or password');
+      }
+    } catch (error) {
+      dispatch(LoginFail({error: error?.message}));
+    }
   };
 
   return (
@@ -60,7 +80,7 @@ export default function SignUp() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 5,
+            marginTop: 2,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -77,10 +97,10 @@ export default function SignUp() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="firstname"
                   required
                   fullWidth
-                  id="firstName"
+                  id="firstname"
                   label="First Name"
                   autoFocus
                 />
@@ -89,9 +109,9 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="lastname"
                   label="Last Name"
-                  name="lastName"
+                  name="lastname"
                   autoComplete="family-name"
                 />
               </Grid>
@@ -122,9 +142,9 @@ export default function SignUp() {
                     fullWidth
                     name="repeatPassword"
                     label="Repeat password"
-                    type="repeatpassword"
+                    type="password"
                     id="repeatpassword"
-                    // autoComplete="new-password"
+                    autoComplete="new-password"
                 />
               </Grid>
               <Grid item xs={12}>

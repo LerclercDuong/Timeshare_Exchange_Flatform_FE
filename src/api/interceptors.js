@@ -19,7 +19,6 @@ function setAuthorizationHeader(params) {
 
 function handleRefreshToken(refreshToken) {
     isRefreshing = true;
-
     api.post(
         '/auth/refresh',
         {refreshToken},

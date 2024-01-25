@@ -55,7 +55,7 @@ function Copyright(props) {
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
             <Link color="inherit" href="https://mui.com/">
-                Timeshare Exchange Flatform
+                Timeshare Exchange Platform
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -117,7 +117,7 @@ const defaultTheme = createTheme(
                 main: '#faa935',
             },
             secondary: {
-                main: '#4fa34f',
+                main: '#31415e',
             },
         },
     }

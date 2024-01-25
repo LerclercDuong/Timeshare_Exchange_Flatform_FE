@@ -18,7 +18,6 @@ function App() {
                 const response = await api.patch('/auth/isAuth')
                 if (response.data) {
                     dispatch(LoginSuccess(response.data))
-                    navigate('/')
                 } else {
                     const refreshToken = await api.post('/auth/refresh-token')
                     if (refreshToken.data) {
@@ -56,7 +55,7 @@ function App() {
                 key={index}
                 path={route.path}
                 element={
-                  isAuthenticated ? (
+                  isAuthenticated === true ? (
                     <Page/>
                   ) : (
                     <Navigate to="/login" />

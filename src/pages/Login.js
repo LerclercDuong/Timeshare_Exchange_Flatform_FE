@@ -53,7 +53,7 @@ export default function SignInSide() {
     let isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -66,9 +66,9 @@ export default function SignInSide() {
             const loginData = await LoginWithUsernameAndPassword(information?.username, information?.password);
             if(loginData?.userData){
                 dispatch(LoginSuccess(loginData.userData));
-                navigate('/home')
+                navigate(-1)
             }else{
-                throw new Error('Wrong username or password')
+                throw new Error('Wrong username or password');
             }
         } catch (error) {
             dispatch(LoginFail({error: error?.message}));

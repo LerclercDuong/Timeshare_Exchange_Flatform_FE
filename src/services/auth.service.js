@@ -17,13 +17,15 @@ const LoginWithUsernameAndPassword = async (username, password) => {
             console.log(err)
         })
 }
-const SignUp = async (username, password, repeatPassword) => {
+const SignUpWithUsernameAndPassword = async ({firstname, lastname, username, password, repeatPassword}) => {
     return api.post(
         '/auth/signup',
-        {username, password, repeatPassword})
+        {firstname, lastname, username, password, repeatPassword})
         .then((res) => {
             const responseData = res.data;
             if (responseData) {
+                SetAccessToken(responseData.tokens.access.token);
+                SetRefreshToken(responseData.tokens.refresh.token);
                 return responseData;
             }
         })
@@ -64,6 +66,6 @@ const SignUp = async (username, password, repeatPassword) => {
 
 // export default new AuthService;
 export {
-    SignUp,
+    SignUpWithUsernameAndPassword,
     LoginWithUsernameAndPassword
 }

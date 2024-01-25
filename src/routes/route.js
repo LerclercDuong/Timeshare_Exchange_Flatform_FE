@@ -7,6 +7,7 @@ import TimeShare from "../pages/TimeShare";
 import TimeShareDetails from "../pages/TimeShareDetails";
 import ThankYou from "../pages/ThankYou";
 import ExchangeSuccess from "../pages/ExchangeSuccess";
+import PostTimeshare from "../components/PostTimeshare";
 
 const privateRoutes = [
     {
@@ -39,6 +40,10 @@ const publicRoutes = [
     {
         path: '/timeshare',
         page: TimeShare
+    },
+    {
+        path: '/post-timeshare',
+        page: PostTimeshare,
     },
     {
         path: '/timesharedetails/:id',

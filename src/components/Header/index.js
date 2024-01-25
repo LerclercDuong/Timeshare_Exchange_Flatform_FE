@@ -17,7 +17,7 @@ const nav_links = [
       display:'About'
     },
     {
-      path: '/yourtimeshare',
+      path: '/post-timeshare',
       display: 'Post Timeshare'
     },
     {
