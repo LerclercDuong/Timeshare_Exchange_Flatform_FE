@@ -19,7 +19,7 @@ const LoginWithUsernameAndPassword = async (username, password) => {
 }
 const SignUpWithUsernameAndPassword = async ({firstname, lastname, username, password, repeatPassword}) => {
     return api.post(
-        '/auth/signup',
+        '/auth/register',
         {firstname, lastname, username, password, repeatPassword})
         .then((res) => {
             const responseData = res.data;

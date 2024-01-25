@@ -15,6 +15,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from 'react-hook-form';
+import {SignUpWithUsernameAndPassword} from "../services/auth.service";
+import {LoginFail, LoginSuccess, RegisterSuccess} from "../actions/auth.action";
+import { Alert } from '@mui/material';
 
 function Copyright(props) {
   return (
@@ -45,6 +48,10 @@ const defaultTheme = createTheme(
 );
 
 export default function SignUp() {
+
+  const [open, setOpen] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
+
   const schema = yup.object().shape({
     firstname: yup.string()
       .required("First Name is required!")
@@ -72,16 +79,30 @@ export default function SignUp() {
   } = useForm({
       resolver: yupResolver(schema),
   })
-  const onRegister = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      firstname: data.get('firstname'),
-      lastname: data.get('lastname'),
-      username: data.get('username'),
-      password: data.get('password'),
-      repeatPassword: data.get('repeatPassword'),
-    });
+  const onRegister = async (event) => {
+    setSuccess(false);
+    // event.preventDefault();
+    // const data = new FormData(event);
+    const information = {
+      firstname: event.firstname,
+      lastname: event.lastname,
+      username: event.username,
+      password: event.password,
+      repeatPassword: event.repeatPassword,
+    }
+    console.log(information)
+    try {
+      const data = await SignUpWithUsernameAndPassword(information);
+      console.log(data)
+      if(data?.userData){
+        setSuccess(true);
+        setOpen(true);
+      }else{
+        throw new Error(data.message);
+      }
+    } catch (error) {
+
+    }
   };
 
   return (
@@ -102,15 +123,23 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          {
+              (success === true && open) && (
+          <Alert variant="filled" severity="success" onClose={() => { setOpen(false);}}>
+            Register successfully
+          </Alert>
+              )
+          }
+
           <Box component="form" noValidate onSubmit={handleSubmit(onRegister)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="firstname"
                   required
                   fullWidth
-                  id="firstName"
+                  id="firstname"
                   label="First Name"
                   inputProps={{
                     maxLength: 20, // Set the maximum number of characters
@@ -125,9 +154,9 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="lastname"
                   label="Last Name"
-                  name="lastName"
+                  name="lastname"
                   autoComplete="family-name"
                   inputProps={{
                     maxLength: 15, // Set the maximum number of characters

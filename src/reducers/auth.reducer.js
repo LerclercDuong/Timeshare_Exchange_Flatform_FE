@@ -1,4 +1,4 @@
-import {LOGIN, LOGOUT, REGISTER, LOGIN_SUCCESS, LOGIN_FAIL} from "../actions/types";
+import {LOGIN, LOGOUT, REGISTER, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_SUCCESS} from "../actions/types";
 
 // src/reducers/authReducer.js
 const initialState = {
@@ -30,6 +30,25 @@ const authReducer = (state = initialState, action) => {
             }
         case LOGIN_FAIL:
             const {error} = action.payload;
+            try {
+                return {
+                    ...state,
+                    isAuthenticated: false,
+                    user: null,
+                    error: error,
+                };
+            } catch (error) {
+                // Handle error appropriately, you might want to set error in the state
+                console.error("Login failed:", error);
+                return {
+                    ...state,
+                    isAuthenticated: false,
+                    user: null,
+                    error: "Login failed",
+                };
+            }
+        case REGISTER_SUCCESS:
+            // const {_id, username, role, profilePicture} = action.payload;
             try {
                 return {
                     ...state,
