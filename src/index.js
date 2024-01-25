@@ -3,14 +3,26 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "remixicon/fonts/remixicon.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import reportWebVitals from './reportWebVitals';
+import {Provider} from 'react-redux';
+import store from './stores';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
+  <GoogleOAuthProvider clientId="<your_client_id>">
     <BrowserRouter>
-      <App />
+        <Provider store={store}>
+            <App/>
+        </Provider>
     </BrowserRouter>
+  </GoogleOAuthProvider>
+
   // </React.StrictMode>
 );
 
