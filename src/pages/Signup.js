@@ -12,10 +12,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {SignUpWithUsernameAndPassword} from "../services/auth.service";
-import {LoginFail, LoginSuccess, RegisterSuccess} from "../actions/auth.action";
-import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from 'react-hook-form';
 
 function Copyright(props) {
   return (
@@ -46,32 +45,43 @@ const defaultTheme = createTheme(
 );
 
 export default function SignUp() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleSubmit = async (event) => {
+  const schema = yup.object().shape({
+    firstname: yup.string()
+      .required("First Name is required!")
+      .matches(/^[a-zA-Z]+$/, 'Field cannot have numeric or special characters'),
+    lastname: yup.string()
+      .required("Last Name is required!")
+      .matches(/^[a-zA-Z]+$/, 'Field cannot have numeric or special characters'),
+    username: yup.string()
+      .required("Username is required!")
+      .min(3, 'Username must be at least 3 characters long')
+      .matches(/^[a-zA-Z0-9]*$/, 'Username cannot contain special characters'),
+    password: yup.string()
+      .required("Password is required!")
+      .min(8, 'Password must be at least 8 characters long')
+      .matches(/[*@!#%&()^~{}]+/, 'Password must have at least one special character!')
+      .matches(/[A-Z]+/, 'Password must contain at least one uppercase letter'),
+    repeatPassword: yup.string()
+      .required("Repeat password is required!")
+      .oneOf([yup.ref('password'), null], 'Passwords must match'),
+  })
+  const {
+      register,
+      handleSubmit,
+      formState: { errors }
+  } = useForm({
+      resolver: yupResolver(schema),
+  })
+  const onRegister = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-    const information = {
+    console.log({
       firstname: data.get('firstname'),
       lastname: data.get('lastname'),
       username: data.get('username'),
       password: data.get('password'),
       repeatPassword: data.get('repeatPassword'),
-    }
-
-    try {
-      const registerData = await SignUpWithUsernameAndPassword(information);
-      if(registerData?.userData){
-        dispatch(RegisterSuccess(registerData.userData));
-        navigate('/home')
-      }else{
-        throw new Error('Wrong username or password');
-      }
-    } catch (error) {
-      dispatch(LoginFail({error: error?.message}));
-    }
+    });
   };
 
   return (
@@ -80,7 +90,7 @@ export default function SignUp() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 2,
+            marginTop: 5,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -92,16 +102,22 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleSubmit(onRegister)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstname"
+                  name="firstName"
                   required
                   fullWidth
-                  id="firstname"
+                  id="firstName"
                   label="First Name"
+                  inputProps={{
+                    maxLength: 20, // Set the maximum number of characters
+                  }}
+                  error={!!errors.firstname}
+                  helperText={errors.firstname?.message}
+                  {...register("firstname")}
                   autoFocus
                 />
               </Grid>
@@ -109,10 +125,16 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="lastname"
+                  id="lastName"
                   label="Last Name"
-                  name="lastname"
+                  name="lastName"
                   autoComplete="family-name"
+                  inputProps={{
+                    maxLength: 15, // Set the maximum number of characters
+                  }}
+                  error={!!errors.lastname}
+                  helperText={errors.lastname?.message}
+                  {...register("lastname")}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -122,7 +144,12 @@ export default function SignUp() {
                   id="username"
                   label="Username"
                   name="username"
-                  // autoComplete="email"
+                  inputProps={{
+                    maxLength: 20, // Set the maximum number of characters
+                  }}
+                  error={!!errors.username}
+                  helperText={errors.username ? errors.username.message : "Must be at least 3 characters long, only allows alphanumberic characters"}
+                  {...register("username")}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -134,6 +161,9 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  error={!!errors.password}
+                  helperText={errors.password ? errors.password.message : ["Must be at least 8 characters long, has uppercase and lowercase characters and has special characters like !@#$%..."]}
+                  {...register("password")}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -144,7 +174,10 @@ export default function SignUp() {
                     label="Repeat password"
                     type="password"
                     id="repeatpassword"
-                    autoComplete="new-password"
+                    // autoComplete="new-password"
+                    error={!!errors.repeatPassword}
+                    helperText={errors.repeatPassword?.message}
+                    {...register("repeatPassword")}
                 />
               </Grid>
               <Grid item xs={12}>
