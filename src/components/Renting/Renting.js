@@ -96,12 +96,12 @@ const Renting = ({ tour, avgRating }) => {
         <div className='booking__bottom'>
             <ListGroup>
                 <ListGroupItem className='border-0 px-0'>
-                    <h5 className='d-flex align-items-center gap-1'>
+                    <p className='d-flex align-items-center ga p-1'>
                         ${price2} <i class="ri-close-line"></i> night
-                    </h5>
+                    </p>
                 </ListGroupItem>
                 <ListGroupItem className='border-0 px-0 total'>
-                    <h5>Total</h5>
+                    <h4>Total</h4>
                     <span> ${totalAmount}</span>
                 </ListGroupItem>
             </ListGroup>

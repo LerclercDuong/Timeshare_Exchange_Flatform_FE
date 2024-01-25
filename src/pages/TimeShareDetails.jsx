@@ -4,10 +4,10 @@ import { Container, Row, Col, Form, ListGroup } from 'reactstrap'
 import { useParams } from 'react-router-dom'
 import tourData from '../assets/data/tours'
 import calculateAvgRating from '../utils/avgRating'
-import { Money } from '@mui/icons-material'
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
 import avatar from '../assets/images/avatar.jpg'
 import Renting from '../components/Renting/Renting'
-
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -36,6 +36,9 @@ const TimeShareDetails = () => {
         const reviewText = reviewMsgRef.current.value
         alert(`${reviewText}, ${tourRating}`);
         //later will call API
+    }
+    const handleRatingChange = (e, newValue) => {
+        setTourRating(newValue);
     }
 
     return <>
@@ -82,13 +85,14 @@ const TimeShareDetails = () => {
                             <div className='tour__reviews mt-4'>
                                 <h4>Reviews ({reviews?.length} reviews)</h4>
                                 <Form onSubmit={submitHandler}>
-                                    <div className='d-flex align-items-center gap-3 mb-4 rating__group'>
-                                        <span onClick={() => setTourRating(1)}> 1<i class="ri-star-s-fill"></i></span>
-                                        <span onClick={() => setTourRating(2)}> 2<i class="ri-star-s-fill"></i></span>
-                                        <span onClick={() => setTourRating(3)}> 3<i class="ri-star-s-fill"></i></span>
-                                        <span onClick={() => setTourRating(4)}> 4<i class="ri-star-s-fill"></i></span>
-                                        <span onClick={() => setTourRating(5)}> 5<i class="ri-star-s-fill"></i></span>
-                                    </div>
+                                    <Box component="fieldset" borderColor="transparent">
+                                        <Rating
+                                            name="tour-rating"
+                                            size="large"
+                                            value={tourRating}
+                                            onChange={handleRatingChange}
+                                        />
+                                    </Box>
                                     <div className="review__input">
                                         <input
                                             type="text"
