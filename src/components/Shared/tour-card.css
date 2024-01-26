@@ -1,7 +1,7 @@
 .tour__img img {
     width: 100%;
     border-radius: 5px 5px 0 0;
-
+    height: 14rem;
 }
 
 .card {
@@ -88,4 +88,44 @@
     font-weight: 500;
     color: var(--text-color);
     font-size: 0.8rem;
+}
+
+/* Add hover styles to show the arrows */
+.tour__card:hover .slick-prev,
+.tour__card:hover .slick-next {
+    opacity: 1;
+}
+
+/* Hide the arrows initially */
+.slick-prev,
+.slick-next {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Styles for the arrows */
+.slick-prev,
+.slick-next {
+    /*width: 40px;*/
+    /*height: 40px;*/
+    /*font-size: 40px !important;*/
+    /*background-color: #fff; !* Set the background color as needed *!*/
+    opacity: 0.1;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    cursor: pointer;
+}
+
+.slick-prev {
+    left: 6px;
+}
+
+.slick-next {
+    right: 14px;
+}
+
+.slick-prev:before, .slick-next:before {
+    font-size: 30px;
 }

@@ -14,7 +14,7 @@ const LoginWithUsernameAndPassword = async (username, password) => {
             }
         })
         .catch((err) => {
-            console.log(err)
+            throw err.response;
         })
 }
 const SignUpWithUsernameAndPassword = async ({firstname, lastname, username, password, repeatPassword}) => {
@@ -24,13 +24,11 @@ const SignUpWithUsernameAndPassword = async ({firstname, lastname, username, pas
         .then((res) => {
             const responseData = res.data;
             if (responseData) {
-                SetAccessToken(responseData.tokens.access.token);
-                SetRefreshToken(responseData.tokens.refresh.token);
                 return responseData;
             }
         })
         .catch((err) => {
-
+            throw err.response
         })
 }
 

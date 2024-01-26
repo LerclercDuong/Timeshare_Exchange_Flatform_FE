@@ -4,16 +4,19 @@ import CommonSection from '../components/Shared/CommonSection'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../styles/timeshare.css';
-//import TourCard from '../Shared/TourCard';
 import SearchBar from '../components/Shared/SearchBar';
 import tourData from '../assets/data/tours';
 import {Container, Row, Col} from 'reactstrap';
 import TourCard from '../components/Shared/TourCard';
+import {
+    GetAllTimeshare
+} from "../services/timeshare.service";
 
 const TimeShare = () => {
 
     const [pageCount, setPageCount] = useState(0)
     const [page, setPage] = useState(0)
+    const [tourList, setTourList] = useState([]);
 
     useEffect(() => {
 
@@ -21,11 +24,16 @@ const TimeShare = () => {
         setPageCount(pages);
 
     }, [page])
-
+    useEffect(() => {
+        async function Get(){
+            const list = await GetAllTimeshare();
+            setTourList(list);
+        }
+        Get()
+    });
     return (
         <>
             <Header/>
-
             <CommonSection title={"All TimeShares"}></CommonSection>
             <section>
                 <Container>
@@ -38,11 +46,17 @@ const TimeShare = () => {
                 <Container>
                     <Row>
                         {
-                            tourData?.map(tour => (
+                            tourList?.map(tour => (
                                 <Col lg='3' className='mb-4' key={tour.id}>
                                     <TourCard tour={tour}/>
                                 </Col>))
                         }
+                        {/*{*/}
+                        {/*    tourData?.map(tour => (*/}
+                        {/*        <Col lg='3' className='mb-4' key={tour.id}>*/}
+                        {/*            <TourCard tour={tour}/>*/}
+                        {/*        </Col>))*/}
+                        {/*}*/}
                         <Col lg='12'>
                             <div className="pagination d-flex align-items-center justify-content-center mt-4 gap-3">
                                 {[...Array(pageCount).keys()].map(number => (

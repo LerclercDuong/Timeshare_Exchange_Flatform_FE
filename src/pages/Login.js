@@ -66,7 +66,7 @@ export default function SignInSide() {
             const loginData = await LoginWithUsernameAndPassword(information?.username, information?.password);
             if(loginData?.userData){
                 dispatch(LoginSuccess(loginData.userData));
-                navigate(-1)
+                navigate('/home')
             }else{
                 throw new Error('Wrong username or password');
             }

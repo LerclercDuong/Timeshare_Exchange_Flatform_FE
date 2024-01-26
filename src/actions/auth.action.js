@@ -1,7 +1,8 @@
 import {
     LOGIN_FAIL,
     LOGIN_SUCCESS,
-    REGISTER_SUCCESS
+    REGISTER_SUCCESS,
+    REGISTER_FAIL
 } from "./types";
 
 
@@ -30,5 +31,18 @@ const RegisterSuccess = (information) => (dispatch) => {
         },
     });
 };
+const RegisterFail = (information) => (dispatch) => {
+    dispatch({
+        type: REGISTER_FAIL,
+        payload: {
+            ...information
+        },
+    });
+};
 
-export {LoginSuccess, LoginFail, RegisterSuccess};
+export {
+    LoginSuccess,
+    LoginFail,
+    RegisterSuccess,
+    RegisterFail
+};

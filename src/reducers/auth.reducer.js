@@ -1,4 +1,4 @@
-import {LOGIN, LOGOUT, REGISTER, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_SUCCESS} from "../actions/types";
+import {REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_SUCCESS} from "../actions/types";
 
 // src/reducers/authReducer.js
 const initialState = {
@@ -10,61 +10,34 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN_SUCCESS:
-            const {_id, username, role, profilePicture} = action.payload;
-            try {
-                return {
-                    ...state,
-                    isAuthenticated: true,
-                    user: {_id, username, role, profilePicture},
-                    error: null,
-                };
-            } catch (error) {
-                // Handle error appropriately, you might want to set error in the state
-                console.error("Login failed:", error);
-                return {
-                    ...state,
-                    isAuthenticated: false,
-                    user: null,
-                    error: "Login failed",
-                };
-            }
+            return {
+                ...state,
+                isAuthenticated: true,
+                user: action.payload,
+                error: null,
+            };
         case LOGIN_FAIL:
             const {error} = action.payload;
-            try {
-                return {
-                    ...state,
-                    isAuthenticated: false,
-                    user: null,
-                    error: error,
-                };
-            } catch (error) {
-                // Handle error appropriately, you might want to set error in the state
-                console.error("Login failed:", error);
-                return {
-                    ...state,
-                    isAuthenticated: false,
-                    user: null,
-                    error: "Login failed",
-                };
-            }
+            return {
+                ...state,
+                isAuthenticated: false,
+                user: null,
+                error: "Login fail",
+            };
         case REGISTER_SUCCESS:
-            // const {_id, username, role, profilePicture} = action.payload;
-            try {
-                return {
-                    ...state,
-                    isAuthenticated: false,
-                    user: null,
-                    error: error,
-                };
-            } catch (error) {
-                // Handle error appropriately, you might want to set error in the state
-                console.error("Login failed:", error);
-                return {
-                    ...state,
-                    isAuthenticated: false,
-                    user: null,
-                    error: "Login failed",
-                };
+            return {
+                ...state,
+                isAuthenticated: true,
+                user: action.payload,
+                error: null,
+            }
+        case REGISTER_FAIL:
+            console.log(action.payload)
+            return {
+                ...state,
+                isAuthenticated: false,
+                user: null,
+                error: action.payload.data,
             }
         default:
             return state;

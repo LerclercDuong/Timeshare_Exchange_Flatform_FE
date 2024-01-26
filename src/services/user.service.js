@@ -24,6 +24,7 @@ export function GetTimeshareBelongToUser(userId) {
     return api.get('/booking/post-timeshare')
         .then((res) => {
             console.log(res.data)
+            return res.data
         })
         .catch((err) => {
             throw err
